@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://greyveil.com/sitemap.xml
+Sitemap: https://greyveiltech.netlify.app/sitemap.xml
