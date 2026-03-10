@@ -119,12 +119,13 @@
     </div>
 
     <!-- RIGHT: Form -->
-    <!-- ✏️ Replace YOUR_FORMSPREE_ID below with your ID from formspree.io -->
-  <div class="contact-form-wrap">
+    <div class="contact-form-wrap">
       <h3>Send us a message</h3>
       <p>Tell us about your project or security concern and we'll get back to you within one business day.</p>
 
-      <form onsubmit="handleSubmit(event)">
+      <form action="https://formspree.io/f/xnjgpvvz" method="POST" id="enquiry-form">
+        <input type="hidden" name="_subject" value="New Enquiry — Greyveil Technologies"/>
+        <input type="hidden" name="_next" value="https://greyveil.com/assets/contact.html?sent=true"/>
 
         <div class="form-row">
           <div class="form-group">
