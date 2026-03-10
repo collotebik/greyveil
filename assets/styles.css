@@ -1399,3 +1399,111 @@ a[href]:not([href^="#"]):not([href^="mailto"]):not([href^="tel"]):not([href^="ht
 @media (max-width: 900px) {
   .wa-float { bottom: 4.5rem; right: 1.2rem; }
 }
+
+/* ── KNOWLEDGE DROPDOWN ── */
+.nav-dropdown { position: relative; }
+
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  user-select: none;
+}
+.dropdown-toggle svg {
+  transition: transform 0.22s ease;
+  opacity: 0.7;
+}
+.nav-dropdown.open .dropdown-toggle svg {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #141416;
+  border: 1px solid rgba(255,255,255,0.08);
+  min-width: 230px;
+  padding: 0.5rem 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(-6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 200;
+  list-style: none;
+}
+.dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px; height: 8px;
+  background: #141416;
+  border-left: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  rotate: 45deg;
+}
+
+.nav-dropdown.open .dropdown-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.dropdown-menu li a {
+  display: flex;
+  flex-direction: column;
+  padding: 0.85rem 1.4rem;
+  gap: 2px;
+  transition: background 0.15s;
+  text-decoration: none;
+  font-size: 0.88rem;
+  color: var(--silver);
+}
+.dropdown-menu li a:hover {
+  background: rgba(126,184,196,0.06);
+  color: var(--accent);
+}
+.dropdown-menu li + li {
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.dd-title {
+  font-size: 0.88rem;
+  color: inherit;
+  font-weight: 400;
+}
+.dd-sub {
+  font-size: 0.72rem;
+  color: var(--grey-pale);
+  font-weight: 300;
+}
+.dropdown-menu li a:hover .dd-sub {
+  color: rgba(126,184,196,0.7);
+}
+
+/* Mobile: dropdown becomes inline accordion */
+@media (max-width: 900px) {
+  .dropdown-menu {
+    position: static;
+    transform: none !important;
+    border: none;
+    background: rgba(255,255,255,0.03);
+    min-width: unset;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0;
+    opacity: 1;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+  .dropdown-menu::before { display: none; }
+  .nav-dropdown.open .dropdown-menu {
+    max-height: 200px;
+    padding: 0.4rem 0;
+  }
+  .dropdown-menu li a {
+    padding: 0.65rem 2rem;
+  }
+}
