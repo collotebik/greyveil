@@ -132,32 +132,44 @@ nav {
 
 .logo {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.45rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.02em;
   color: var(--white);
   text-decoration: none;
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 0;
 }
 
 .logo .logo-grey,
-.footer-logo .logo-grey { color: var(--silver); }
+.footer-logo .logo-grey {
+  color: var(--silver);
+  font-weight: 600;
+}
 
 .logo .logo-veil,
-.footer-logo .logo-veil  { color: var(--accent); }
+.footer-logo .logo-veil {
+  color: var(--accent);
+  font-weight: 300;
+  font-style: italic;
+}
 
 .logo .logo-dot,
-.footer-logo .logo-dot   { color: var(--accent); opacity: 0.5; margin: 0 1px; }
+.footer-logo .logo-dot { display: none; }
 
-.logo .logo-tech {
+.logo .logo-tech,
+.footer-logo .logo-tech {
   color: var(--grey-pale);
-  font-weight: 300;
-  font-size: 1rem;
-  letter-spacing: 0.18em;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 200;
+  font-style: normal;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  margin-left: 6px;
+  margin-left: 9px;
+  align-self: center;
+  padding-top: 2px;
 }
 
 
@@ -1373,7 +1385,7 @@ a[href]:not([href^="#"]):not([href^="mailto"]):not([href^="tel"]):not([href^="ht
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 98;
+  z-index: 9999;
   box-shadow: 0 4px 16px rgba(37,211,102,0.35);
   transition: transform 0.25s, box-shadow 0.25s;
   text-decoration: none;
