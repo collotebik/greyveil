@@ -14,12 +14,16 @@
     <a href="../index.html" class="logo">
       <span class="logo-grey">Grey</span><span class="logo-veil">veil</span><span class="logo-dot">·</span><span class="logo-tech">Technologies</span>
     </a>
-    <ul class="nav-links">
+    <ul class="nav-links" id="nav-links">
       <li><a href="services.html">Services</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="contact.html">Contact</a></li>
+      <li class="mobile-cta-item"><a href="contact.html" class="btn-primary" style="font-size:0.8rem;padding:0.65rem 1.4rem;display:inline-block;">Get a Consultation</a></li>
     </ul>
-    <a href="contact.html" class="nav-cta">Get a Consultation</a>
+    <a href="contact.html" class="nav-cta desktop-cta">Get a Consultation</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <!-- ── PAGE HERO ── -->
@@ -210,5 +214,33 @@
     <div class="footer-copy">© 2025 Greyveil Technologies. Nairobi, Kenya.</div>
   </footer>
 
+  <script>
+    if (window.matchMedia("(pointer: fine)").matches) {
+      const glow = document.createElement("div");
+      glow.style.cssText = "position:fixed;top:0;left:0;width:600px;height:600px;border-radius:50%;pointer-events:none;z-index:0;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(126,184,196,0.07) 0%,rgba(126,184,196,0.03) 30%,transparent 70%);transition:opacity 0.4s ease;opacity:0;";
+      document.body.appendChild(glow);
+      let mouseX=0,mouseY=0,glowX=0,glowY=0,visible=false;
+      document.addEventListener("mousemove",(e)=>{mouseX=e.clientX;mouseY=e.clientY;if(!visible){glow.style.opacity="1";visible=true;}});
+      document.addEventListener("mouseleave",()=>{glow.style.opacity="0";visible=false;});
+      function lerp(a,b,t){return a+(b-a)*t;}
+      function animate(){glowX=lerp(glowX,mouseX,0.06);glowY=lerp(glowY,mouseY+window.scrollY,0.06);glow.style.left=glowX+"px";glow.style.top=glowY+"px";requestAnimationFrame(animate);}
+      animate();
+    }
+  </script>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('nav-links');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      hamburger.classList.toggle('active');
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        hamburger.classList.remove('active');
+      });
+    });
+  </script>
 </body>
 </html>
