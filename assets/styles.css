@@ -1234,6 +1234,8 @@ footer {
 .hero { pointer-events: auto; }
 #hero-canvas { pointer-events: auto; }
 .hero-content { pointer-events: none; }
+.hero-content a,
+.hero-content button { pointer-events: auto; }
 
 /* ── HAMBURGER BUTTON ── */
 .hamburger {
