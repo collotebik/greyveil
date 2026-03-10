@@ -33,10 +33,10 @@
 }
 
 :root {
-  --black:       #0a0a0b;
-  --grey-dark:   #141416;
-  --grey-mid:    #2a2a2e;
-  --grey-light:  #5a5a62;
+  --black:       #212123;
+  --grey-dark:   #2a2a2d;
+  --grey-mid:    #363639;
+  --grey-light:  #6a6a74;
   --grey-pale:   #9a9aa4;
   --silver:      #c8c8d0;
   --white:       #f4f4f6;
@@ -1435,7 +1435,7 @@ a[href]:not([href^="#"]):not([href^="mailto"]):not([href^="tel"]):not([href^="ht
   top: calc(100% + 12px);
   left: 50%;
   transform: translateX(-50%);
-  background: #141416;
+  background: #2a2a2d;
   border: 1px solid rgba(255,255,255,0.08);
   min-width: 230px;
   padding: 0.5rem 0;
@@ -1453,7 +1453,7 @@ a[href]:not([href^="#"]):not([href^="mailto"]):not([href^="tel"]):not([href^="ht
   left: 50%;
   transform: translateX(-50%);
   width: 8px; height: 8px;
-  background: #141416;
+  background: #2a2a2d;
   border-left: 1px solid rgba(255,255,255,0.08);
   border-top: 1px solid rgba(255,255,255,0.08);
   rotate: 45deg;
@@ -1558,7 +1558,7 @@ a[href]:not([href^="#"]):not([href^="mailto"]):not([href^="tel"]):not([href^="ht
    LIGHT MODE — CSS VARIABLE OVERRIDES
    Applied when <html data-theme="light">
 ══════════════════════════════════════════ */
-[data-theme="light"] {
+[data-theme="light"] { /* light mode overrides */
   --black:      #f4f4f6;
   --grey-dark:  #e8e8ec;
   --grey-mid:   #d0d0d8;
