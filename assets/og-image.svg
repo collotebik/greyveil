@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,300&amp;family=DM+Sans:wght@200;300&amp;display=swap');
+    </style>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0a0a0b"/>
+      <stop offset="100%" stop-color="#141416"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="70%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#7eb8c4" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#0a0a0b" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- Grid lines -->
+  <line x1="0" y1="210" x2="1200" y2="210" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+  <line x1="0" y1="420" x2="1200" y2="420" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+  <line x1="400" y1="0" x2="400" y2="630" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+  <line x1="800" y1="0" x2="800" y2="630" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+
+  <!-- Teal accent bar left -->
+  <rect x="0" y="0" width="5" height="630" fill="#7eb8c4" opacity="0.7"/>
+
+  <!-- Eye mark — large, right side -->
+  <g transform="translate(870, 215) scale(3.2)" opacity="0.15">
+    <path d="M 6 36 C 18 16 54 16 66 36 C 54 56 18 56 6 36 Z" fill="none" stroke="#7eb8c4" stroke-width="1.8"/>
+    <circle cx="36" cy="36" r="11" fill="none" stroke="#7eb8c4" stroke-width="1.4"/>
+    <circle cx="36" cy="36" r="4.5" fill="#7eb8c4"/>
+    <line x1="7" y1="32" x2="65" y2="32" stroke="#7eb8c4" stroke-width="0.8"/>
+    <line x1="7" y1="36" x2="65" y2="36" stroke="#7eb8c4" stroke-width="0.8"/>
+    <line x1="7" y1="40" x2="65" y2="40" stroke="#7eb8c4" stroke-width="0.8"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="80" y="270"
+    font-family="'Cormorant Garamond', Georgia, serif"
+    font-weight="600"
+    font-size="96"
+    letter-spacing="2"
+    fill="#c8c8d0">Grey</text>
+  <text x="316" y="270"
+    font-family="'Cormorant Garamond', Georgia, serif"
+    font-weight="300"
+    font-style="italic"
+    font-size="96"
+    letter-spacing="2"
+    fill="#7eb8c4">veil</text>
+
+  <!-- Divider line -->
+  <line x1="80" y1="295" x2="560" y2="295" stroke="#2a2a2e" stroke-width="1.2"/>
+
+  <!-- Tagline -->
+  <text x="80" y="340"
+    font-family="'DM Sans', Arial, sans-serif"
+    font-weight="200"
+    font-size="18"
+    letter-spacing="6"
+    fill="#9a9aa4">TECHNOLOGIES</text>
+
+  <!-- Descriptor -->
+  <text x="80" y="420"
+    font-family="'Cormorant Garamond', Georgia, serif"
+    font-weight="300"
+    font-style="italic"
+    font-size="34"
+    fill="#c8c8d0">Securing Africa's Digital Future.</text>
+
+  <!-- Services pill tags -->
+  <rect x="80" y="460" width="190" height="34" rx="2" fill="rgba(126,184,196,0.08)" stroke="#7eb8c4" stroke-width="0.8" stroke-opacity="0.4"/>
+  <text x="175" y="482" font-family="'DM Sans', Arial, sans-serif" font-size="12" letter-spacing="2.5" fill="#7eb8c4" text-anchor="middle">PENETRATION TESTING</text>
+
+  <rect x="284" y="460" width="148" height="34" rx="2" fill="rgba(126,184,196,0.08)" stroke="#7eb8c4" stroke-width="0.8" stroke-opacity="0.4"/>
+  <text x="358" y="482" font-family="'DM Sans', Arial, sans-serif" font-size="12" letter-spacing="2.5" fill="#7eb8c4" text-anchor="middle">MANAGED SOC</text>
+
+  <rect x="446" y="460" width="148" height="34" rx="2" fill="rgba(126,184,196,0.08)" stroke="#7eb8c4" stroke-width="0.8" stroke-opacity="0.4"/>
+  <text x="520" y="482" font-family="'DM Sans', Arial, sans-serif" font-size="12" letter-spacing="2.5" fill="#7eb8c4" text-anchor="middle">COMPLIANCE</text>
+
+  <!-- URL bottom right -->
+  <text x="1120" y="600"
+    font-family="'DM Sans', Arial, sans-serif"
+    font-weight="300"
+    font-size="16"
+    letter-spacing="1.5"
+    fill="#5a5a64"
+    text-anchor="end">greyveiltech.netlify.app</text>
+
+  <!-- Nairobi Kenya -->
+  <text x="80" y="600"
+    font-family="'DM Sans', Arial, sans-serif"
+    font-weight="300"
+    font-size="14"
+    letter-spacing="3"
+    fill="#4a4a54">NAIROBI, KENYA</text>
+
+  <!-- Corner accent -->
+  <polyline points="1165,20 1180,20 1180,50" fill="none" stroke="#7eb8c4" stroke-width="1.5" opacity="0.5"/>
+  <polyline points="20,580 20,610 50,610" fill="none" stroke="#7eb8c4" stroke-width="1.5" opacity="0.5"/>
+</svg>

@@ -9,6 +9,12 @@
   <meta property="og:title" content="About — Greyveil Technologies"/>
   <meta property="og:description" content="Learn about Greyveil Technologies — our story, values, and the team behind Kenya's trusted cybersecurity and technology firm."/>
   <meta property="og:type" content="website"/>
+  <meta property="og:image" content="https://greyveiltech.netlify.app/assets/og-image.svg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:image:alt" content="Greyveil Technologies — Securing Africa's Digital Future"/>
+  <meta name="twitter:image" content="https://greyveiltech.netlify.app/assets/og-image.svg"/>
+  <meta name="twitter:card" content="summary_large_image"/>
   <meta property="og:url" content="https://greyveil.com/assets/about.html"/>
   <meta property="og:site_name" content="Greyveil Technologies"/>
   <meta name="twitter:card" content="summary"/>
@@ -19,6 +25,53 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="/assets/styles.css"/>
+
+  <script type="application/ld+json">
+  [{
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "@id": "https://greyveiltech.netlify.app/#organisation",
+      "name": "Greyveil Technologies",
+      "alternateName": "Greyveil Tech",
+      "url": "https://greyveiltech.netlify.app",
+      "logo": "https://greyveiltech.netlify.app/assets/styles.css",
+      "description": "Enterprise-grade cybersecurity, software engineering and managed IT services based in Nairobi, Kenya.",
+      "foundingDate": "2025",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Nairobi",
+        "addressCountry": "KE"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -1.286389,
+        "longitude": 36.817223
+      },
+      "telephone": "+254741733851",
+      "email": "hello@greyveil.com",
+      "sameAs": [
+        "https://www.linkedin.com/in/collins-gichuki-b3740338a/"
+      ],
+      "areaServed": {
+        "@type": "Place",
+        "name": "Kenya"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Cybersecurity & Technology Services",
+        "itemListElement": [
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Penetration Testing"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Managed Security Operations Centre (SOC)"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Security Audits & Compliance"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Cybersecurity Consulting"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Software Engineering"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Web Development"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "IT Support"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Security Awareness Training"}}
+        ]
+      }
+    }]
+  </script>
 </head>
 <body>
 
@@ -295,6 +348,17 @@
 
 
   <script>
+
+    // ── COOKIE BAR ──
+    const cookieBar = document.getElementById('cookie-bar');
+    const cookieBtn = document.getElementById('cookie-accept');
+    if (cookieBar && !localStorage.getItem('gv_cookie_ok')) {
+      setTimeout(() => cookieBar.classList.add('show'), 1200);
+    }
+    if (cookieBtn) cookieBtn.addEventListener('click', () => {
+      cookieBar.classList.remove('show');
+      localStorage.setItem('gv_cookie_ok', '1');
+    });
 
     // ── KNOWLEDGE DROPDOWN ──
     document.querySelectorAll('.nav-dropdown').forEach(drop => {

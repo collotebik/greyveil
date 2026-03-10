@@ -9,6 +9,12 @@
   <meta property="og:title" content="Case Studies — Greyveil Tech."/>
   <meta property="og:description" content="Real results from Greyveil Technologies engagements across Kenya and Africa."/>
   <meta property="og:type" content="website"/>
+  <meta property="og:image" content="https://greyveiltech.netlify.app/assets/og-image.svg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:image:alt" content="Greyveil Technologies — Securing Africa's Digital Future"/>
+  <meta name="twitter:image" content="https://greyveiltech.netlify.app/assets/og-image.svg"/>
+  <meta name="twitter:card" content="summary_large_image"/>
   <meta property="og:url" content="https://greyveil.com/assets/case-studies.html"/>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90' fill='%237eb8c4'>G</text></svg>"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -75,6 +81,60 @@
       .cs-stat { min-width: 140px; }
     }
   </style>
+
+  <script type="application/ld+json">
+  [{
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "@id": "https://greyveiltech.netlify.app/#organisation",
+      "name": "Greyveil Technologies",
+      "alternateName": "Greyveil Tech",
+      "url": "https://greyveiltech.netlify.app",
+      "logo": "https://greyveiltech.netlify.app/assets/styles.css",
+      "description": "Enterprise-grade cybersecurity, software engineering and managed IT services based in Nairobi, Kenya.",
+      "foundingDate": "2025",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Nairobi",
+        "addressCountry": "KE"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -1.286389,
+        "longitude": 36.817223
+      },
+      "telephone": "+254741733851",
+      "email": "hello@greyveil.com",
+      "sameAs": [
+        "https://www.linkedin.com/in/collins-gichuki-b3740338a/"
+      ],
+      "areaServed": {
+        "@type": "Place",
+        "name": "Kenya"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Cybersecurity & Technology Services",
+        "itemListElement": [
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Penetration Testing"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Managed Security Operations Centre (SOC)"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Security Audits & Compliance"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Cybersecurity Consulting"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Software Engineering"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Web Development"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "IT Support"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Security Awareness Training"}}
+        ]
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "url": "https://greyveiltech.netlify.app/case-studies",
+      "name": "Case Studies — Greyveil Tech",
+      "description": "Real cybersecurity and technology engagements by Greyveil Technologies."
+    }]
+  </script>
 </head>
 <body>
 
@@ -333,6 +393,17 @@
         hamburger.classList.toggle('active');
       });
     }
+    // ── COOKIE BAR ──
+    const cookieBar = document.getElementById('cookie-bar');
+    const cookieBtn = document.getElementById('cookie-accept');
+    if (cookieBar && !localStorage.getItem('gv_cookie_ok')) {
+      setTimeout(() => cookieBar.classList.add('show'), 1200);
+    }
+    if (cookieBtn) cookieBtn.addEventListener('click', () => {
+      cookieBar.classList.remove('show');
+      localStorage.setItem('gv_cookie_ok', '1');
+    });
+
     // ── KNOWLEDGE DROPDOWN ──
     document.querySelectorAll('.nav-dropdown').forEach(drop => {
       const toggle = drop.querySelector('.dropdown-toggle');

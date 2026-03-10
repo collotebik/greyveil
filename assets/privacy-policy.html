@@ -33,6 +33,53 @@
     .toc a { color: var(--grey-pale); }
     .toc a:hover { color: var(--accent); }
   </style>
+
+  <script type="application/ld+json">
+  [{
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "@id": "https://greyveiltech.netlify.app/#organisation",
+      "name": "Greyveil Technologies",
+      "alternateName": "Greyveil Tech",
+      "url": "https://greyveiltech.netlify.app",
+      "logo": "https://greyveiltech.netlify.app/assets/styles.css",
+      "description": "Enterprise-grade cybersecurity, software engineering and managed IT services based in Nairobi, Kenya.",
+      "foundingDate": "2025",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Nairobi",
+        "addressCountry": "KE"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -1.286389,
+        "longitude": 36.817223
+      },
+      "telephone": "+254741733851",
+      "email": "hello@greyveil.com",
+      "sameAs": [
+        "https://www.linkedin.com/in/collins-gichuki-b3740338a/"
+      ],
+      "areaServed": {
+        "@type": "Place",
+        "name": "Kenya"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Cybersecurity & Technology Services",
+        "itemListElement": [
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Penetration Testing"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Managed Security Operations Centre (SOC)"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Security Audits & Compliance"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Cybersecurity Consulting"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Software Engineering"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Web Development"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "IT Support"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Security Awareness Training"}}
+        ]
+      }
+    }]
+  </script>
 </head>
 <body>
 
@@ -216,12 +263,28 @@
   </footer>
 
 
+  <!-- ── COOKIE NOTICE ── -->
+  <div class="cookie-bar" id="cookie-bar">
+    <span>We use cookies to improve your experience. By using this site you agree to our <a href="/privacy-policy">privacy practices</a> in accordance with Kenya's Data Protection Act.</span>
+    <button class="cookie-accept" id="cookie-accept">Got it</button>
+  </div>
   <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">&#9728;</button>
   <a href="https://wa.me/254741733851" target="_blank" rel="noopener noreferrer" class="wa-float" aria-label="Chat on WhatsApp">
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
       <path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.122 1.532 5.857L.057 23.882
   <script>
+    // ── COOKIE BAR ──
+    const cookieBar = document.getElementById('cookie-bar');
+    const cookieBtn = document.getElementById('cookie-accept');
+    if (cookieBar && !localStorage.getItem('gv_cookie_ok')) {
+      setTimeout(() => cookieBar.classList.add('show'), 1200);
+    }
+    if (cookieBtn) cookieBtn.addEventListener('click', () => {
+      cookieBar.classList.remove('show');
+      localStorage.setItem('gv_cookie_ok', '1');
+    });
+
     // ── KNOWLEDGE DROPDOWN ──
     document.querySelectorAll('.nav-dropdown').forEach(drop => {
       const toggle = drop.querySelector('.dropdown-toggle');

@@ -32,6 +32,53 @@
     .toc a { color: var(--grey-pale); }
     .toc a:hover { color: var(--accent); }
   </style>
+
+  <script type="application/ld+json">
+  [{
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "@id": "https://greyveiltech.netlify.app/#organisation",
+      "name": "Greyveil Technologies",
+      "alternateName": "Greyveil Tech",
+      "url": "https://greyveiltech.netlify.app",
+      "logo": "https://greyveiltech.netlify.app/assets/styles.css",
+      "description": "Enterprise-grade cybersecurity, software engineering and managed IT services based in Nairobi, Kenya.",
+      "foundingDate": "2025",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Nairobi",
+        "addressCountry": "KE"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -1.286389,
+        "longitude": 36.817223
+      },
+      "telephone": "+254741733851",
+      "email": "hello@greyveil.com",
+      "sameAs": [
+        "https://www.linkedin.com/in/collins-gichuki-b3740338a/"
+      ],
+      "areaServed": {
+        "@type": "Place",
+        "name": "Kenya"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Cybersecurity & Technology Services",
+        "itemListElement": [
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Penetration Testing"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Managed Security Operations Centre (SOC)"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Security Audits & Compliance"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Cybersecurity Consulting"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Software Engineering"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Web Development"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "IT Support"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Security Awareness Training"}}
+        ]
+      }
+    }]
+  </script>
 </head>
 <body>
 
@@ -179,6 +226,11 @@
   </footer>
 
 
+  <!-- ── COOKIE NOTICE ── -->
+  <div class="cookie-bar" id="cookie-bar">
+    <span>We use cookies to improve your experience. By using this site you agree to our <a href="/privacy-policy">privacy practices</a> in accordance with Kenya's Data Protection Act.</span>
+    <button class="cookie-accept" id="cookie-accept">Got it</button>
+  </div>
   <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">&#9728;</button>
   <a href="https://wa.me/254741733851" target="_blank" rel="noopener noreferrer" class="wa-float" aria-label="Chat on WhatsApp">
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -191,6 +243,17 @@
     const hamburger = document.getElementById('hamburger');
     const navLinks  = document.getE
   <script>
+    // ── COOKIE BAR ──
+    const cookieBar = document.getElementById('cookie-bar');
+    const cookieBtn = document.getElementById('cookie-accept');
+    if (cookieBar && !localStorage.getItem('gv_cookie_ok')) {
+      setTimeout(() => cookieBar.classList.add('show'), 1200);
+    }
+    if (cookieBtn) cookieBtn.addEventListener('click', () => {
+      cookieBar.classList.remove('show');
+      localStorage.setItem('gv_cookie_ok', '1');
+    });
+
     // ── KNOWLEDGE DROPDOWN ──
     document.querySelectorAll('.nav-dropdown').forEach(drop => {
       const toggle = drop.querySelector('.dropdown-toggle');
