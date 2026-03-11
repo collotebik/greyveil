@@ -79,19 +79,25 @@
   if (cookieBar && !localStorage.getItem('gv_cookie_ok')) {
     setTimeout(() => cookieBar.classList.add('show'), 1200);
   }
-  if (cookieBtn) {
+  if (cookieBar && cookieBtn) {
     cookieBtn.addEventListener('click', () => {
       cookieBar.classList.remove('show');
       localStorage.setItem('gv_cookie_ok', '1');
+      setTimeout(() => { cookieBar.style.display = 'none'; }, 420);
     });
   }
 
-  // ── BACK TO TOP ──
-  const btt = document.getElementById('back-to-top');
-  if (btt) {
-    window.addEventListener('scroll', () => {
-      btt.classList.toggle('visible', window.scrollY > 400);
-    });
+  // ── BACK TO TOP + WA FLOAT ──
+  const btt     = document.getElementById('back-to-top');
+  const waFloat = document.querySelector('.wa-float');
+  if (btt || waFloat) {
+    const onScroll = () => {
+      const show = window.scrollY > 400;
+      if (btt)     btt.classList.toggle('visible', show);
+      if (waFloat) waFloat.classList.toggle('visible', show);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll(); // set correct initial state without waiting for a scroll event
   }
 
   // ── DARK / LIGHT TOGGLE ──

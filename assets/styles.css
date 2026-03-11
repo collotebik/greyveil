@@ -1464,8 +1464,14 @@ a[href]:not([href^="#"]):not([href^="mailto"]):not([href^="tel"]):not([href^="ht
   justify-content: center;
   z-index: 9999;
   box-shadow: 0 4px 16px rgba(37,211,102,0.35);
-  transition: transform 0.25s, box-shadow 0.25s;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.25s, box-shadow 0.25s, opacity 0.3s;
   text-decoration: none;
+}
+.wa-float.visible {
+  opacity: 1;
+  pointer-events: auto;
 }
 .wa-float:hover {
   transform: scale(1.1);
