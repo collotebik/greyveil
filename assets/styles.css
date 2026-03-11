@@ -1431,13 +1431,7 @@ footer {
 }
 
 
-/* ── PAGE TRANSITIONS ── */
-body { animation: pageFadeIn 0.45s ease forwards; }
-@keyframes pageFadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-a[href]:not([href^="#"]):not([href^="mailto"]):not([href^="tel"]):not([href^="https"]):not([target="_blank"]) {
-  transition: opacity 0.2s;
-}
+/* page transitions — see end of file */
 
 /* ── WHATSAPP FLOAT ── */
 .wa-float {
@@ -2204,15 +2198,15 @@ a[href]:not([href^="#"]):not([href^="mailto"]):not([href^="tel"]):not([href^="ht
     .toc a { color: var(--grey-pale); }
     .toc a:hover { color: var(--accent); }
 
+
 /* ── PAGE TRANSITIONS ── */
-body {
-  opacity: 0;
-  animation: pageIn 0.35s ease forwards;
-}
+/* IMPORTANT: Do NOT animate body — it creates a stacking context that breaks
+   position:fixed on children (WhatsApp float, back-to-top, theme toggle).
+   Instead we use a simple opacity fade via JS on navigation. */
 @keyframes pageIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
-a[href].transition-out {
-  pointer-events: none;
+body {
+  animation: pageIn 0.35s ease forwards;
 }

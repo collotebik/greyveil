@@ -13,9 +13,8 @@
         href.startsWith('mailto') || href.startsWith('tel') ||
         link.target === '_blank') return;
     e.preventDefault();
-    document.body.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+    document.body.style.transition = 'opacity 0.25s ease';
     document.body.style.opacity    = '0';
-    document.body.style.transform  = 'translateY(-6px)';
     setTimeout(() => { window.location.href = href; }, 260);
   });
 
