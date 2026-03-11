@@ -4,78 +4,45 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>404 — Page Not Found | Greyveil Technologies</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90' fill='%237eb8c4'>G</text></svg>"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@900&family=Unbounded:wght@300;400;700&family=Barlow:wght@200;300;400&display=swap" rel="stylesheet"/>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90' fill='%2345aac1'>G</text></svg>"/>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --black: #0a0a0b; --grey-dark: #141416; --grey-mid: #2a2a2e;
-      --grey-pale: #9a9aa4; --silver: #c8c8d0; --white: #f4f4f6; --accent: #7eb8c4;
-    }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--black); color: var(--white);
-      font-family: 'DM Sans', sans-serif; font-weight: 300;
-      min-height: 100vh; display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center; padding: 2rem; overflow: hidden;
-    }
-    body::before {
-      content: ''; position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none; z-index: 0; opacity: 0.4;
-    }
-    .wrap { position: relative; z-index: 1; max-width: 560px; animation: fadeUp 0.9s ease forwards; opacity: 0; }
-    @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
-    .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; letter-spacing: 0.08em; text-decoration: none; display: inline-flex; align-items: center; margin-bottom: 3.5rem; }
-    .logo-grey { color: var(--silver); }
-    .logo-veil { color: var(--accent); }
-    .logo-dot  { color: var(--accent); opacity: 0.5; margin: 0 1px; }
-    .logo-tech { color: var(--grey-pale); font-weight: 300; font-size: 0.9rem; letter-spacing: 0.18em; text-transform: uppercase; margin-left: 5px; }
-    .code {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(5rem, 18vw, 9rem);
-      font-weight: 600; line-height: 1;
-      color: var(--grey-mid); margin-bottom: 1.5rem;
-      position: relative; display: inline-block;
-    }
-    .code span { color: var(--accent); }
-    .label {
-      font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--accent); display: flex; align-items: center; justify-content: center;
-      gap: 0.7rem; margin-bottom: 1.2rem;
-    }
-    .label::before, .label::after { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); }
-    h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 300; color: var(--white); line-height: 1.2; margin-bottom: 1rem; }
-    p { font-size: 0.94rem; color: var(--grey-pale); line-height: 1.8; margin-bottom: 2.4rem; }
-    .actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-    .btn-primary {
-      background: var(--accent); color: var(--black); border: none;
-      padding: 0.85rem 2.2rem; font-family: 'DM Sans', sans-serif;
-      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em;
-      text-transform: uppercase; text-decoration: none; transition: background 0.25s; display: inline-block;
-    }
-    .btn-primary:hover { background: var(--white); }
-    .btn-outline {
-      background: transparent; border: 1px solid rgba(255,255,255,0.15);
-      color: var(--grey-pale); padding: 0.85rem 2.2rem;
-      font-family: 'DM Sans', sans-serif; font-size: 0.82rem;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      text-decoration: none; transition: all 0.25s; display: inline-block;
-    }
-    .btn-outline:hover { border-color: var(--white); color: var(--white); }
-    canvas { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#212123;--surface:#2a2a2d;--pale:#b8b8c4;--silver:#c8c8d0;--white:#f4f4f6;--faint:#727280;--accent:#45aac1;--border:rgba(255,255,255,0.08)}
+    body{background:var(--bg);color:var(--white);font-family:'Barlow',sans-serif;font-weight:300;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;overflow:hidden;opacity:0;animation:pageIn 0.35s ease forwards}
+    @keyframes pageIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+    canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+    .wrap{position:relative;z-index:1;max-width:560px;opacity:0;animation:fadeUp 0.9s 0.15s ease forwards}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+    .logo{text-decoration:none;display:inline-flex;align-items:baseline;margin-bottom:3.5rem}
+    .logo-g{font-family:'Unbounded',sans-serif;font-weight:700;font-size:0.95rem;color:var(--silver);letter-spacing:-0.02em}
+    .logo-v{font-family:'Unbounded',sans-serif;font-weight:300;font-size:0.95rem;color:var(--accent)}
+    .logo-t{font-family:'Barlow',sans-serif;font-weight:200;font-size:0.5rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--faint);margin-left:8px}
+    .code{font-family:'Big Shoulders Display',sans-serif;font-size:clamp(6rem,20vw,10rem);font-weight:900;line-height:1;color:rgba(255,255,255,0.06);margin-bottom:1.2rem;letter-spacing:0.02em}
+    .code em{font-style:normal;color:var(--accent)}
+    .label{font-family:'Unbounded',sans-serif;font-size:0.52rem;font-weight:300;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;justify-content:center;gap:0.8rem;margin-bottom:1.4rem}
+    .label::before,.label::after{content:'';display:block;width:24px;height:1px;background:var(--accent)}
+    h1{font-family:'Big Shoulders Display',sans-serif;font-size:clamp(1.8rem,5vw,2.8rem);font-weight:900;text-transform:uppercase;color:var(--white);line-height:1;margin-bottom:1.2rem}
+    h1 em{font-style:normal;color:var(--accent);font-weight:400}
+    p{font-size:0.95rem;color:var(--pale);line-height:1.8;margin-bottom:2.4rem;max-width:420px;margin-left:auto;margin-right:auto}
+    .actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+    .btn-primary{background:var(--accent);color:var(--bg);border:none;padding:0.85rem 2.2rem;font-family:'Unbounded',sans-serif;font-size:0.58rem;font-weight:400;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;transition:background 0.25s;display:inline-block}
+    .btn-primary:hover{background:var(--white)}
+    .btn-outline{background:transparent;border:1px solid var(--border);color:var(--pale);padding:0.85rem 2.2rem;font-family:'Barlow',sans-serif;font-size:0.9rem;font-weight:300;letter-spacing:0.04em;text-decoration:none;transition:all 0.25s;display:inline-block}
+    .btn-outline:hover{border-color:var(--white);color:var(--white)}
   </style>
 </head>
 <body>
   <canvas id="c"></canvas>
   <div class="wrap">
     <a href="/" class="logo">
-      <span class="logo-grey">Grey</span><span class="logo-veil">veil</span><span class="logo-dot">·</span><span class="logo-tech">Tech.</span>
+      <span class="logo-g">Grey</span><span class="logo-v">veil</span><span class="logo-t">Tech.</span>
     </a>
-    <div class="code">4<span>0</span>4</div>
+    <div class="code">4<em>0</em>4</div>
     <div class="label">Page Not Found</div>
-    <h1>You've wandered into<br>the grey area.</h1>
+    <h1>You've wandered into<br>the <em>grey area.</em></h1>
     <p>The page you're looking for doesn't exist, has moved, or was never there to begin with. Let's get you back on solid ground.</p>
     <div class="actions">
       <a href="/" class="btn-primary">Back to Home</a>
@@ -84,45 +51,73 @@
   </div>
 
   <script>
-    // Constellation background
-    const canvas = document.getElementById('c');
-    const ctx = canvas.getContext('2d');
-    let W, H, stars = [];
-    function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
-    resize(); window.addEventListener('resize', () => { resize(); init(); });
-    function init() {
-      stars = Array.from({ length: 70 }, () => ({
-        x: Math.random()*W, y: Math.random()*H,
-        vx: (Math.random()-0.5)*0.18, vy: (Math.random()-0.5)*0.18,
-        r: 0.5+Math.random()*1.2, a: 0.2+Math.random()*0.4,
-        t: Math.random()*Math.PI*2
-      }));
-    }
-    init();
-    let tick = 0;
-    function loop() {
-      tick++;
-      ctx.clearRect(0,0,W,H);
-      for (const s of stars) {
-        s.x += s.vx; s.y += s.vy;
-        if (s.x < -10) s.x = W+10; if (s.x > W+10) s.x = -10;
-        if (s.y < -10) s.y = H+10; if (s.y > H+10) s.y = -10;
-        const tw = 0.7+0.3*Math.sin(tick*0.012+s.t);
-        ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
-        ctx.fillStyle = `rgba(200,205,215,${(s.a*tw).toFixed(3)})`; ctx.fill();
+    (function(){
+      const canvas=document.getElementById('c'),ctx=canvas.getContext('2d');
+      const AC={r:69,g:170,b:193},SP=52,ST=90,RA=280,EA=0.09,RE=0.055;
+      const GAB=0.13,GAN=0.55,NAB=0.18,NAN=0.9,NRB=1.0,NRN=2.8;
+      let W=0,H=0,mX=-9999,mY=-9999,tX=-9999,tY=-9999,nodes=[],cols=0,rows=0;
+      const lerp=(a,b,t)=>a+(b-a)*t;
+      function build(){
+        cols=Math.ceil(W/SP)+2;rows=Math.ceil(H/SP)+2;
+        const px=((cols*SP)-W)/2,py=((rows*SP)-H)/2;
+        nodes=[];
+        for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
+          const rx=-px+c*SP,ry=-py+r*SP;
+          nodes.push({rx,ry,cx:rx,cy:ry});
+        }
       }
-      for (let i=0;i<stars.length;i++) for (let j=i+1;j<stars.length;j++) {
-        const d = Math.hypot(stars[i].x-stars[j].x, stars[i].y-stars[j].y);
-        if (d>120) continue;
-        ctx.beginPath(); ctx.moveTo(stars[i].x,stars[i].y); ctx.lineTo(stars[j].x,stars[j].y);
-        ctx.strokeStyle=`rgba(180,185,200,${((1-d/120)*0.055).toFixed(3)})`; ctx.lineWidth=0.5; ctx.stroke();
+      function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;build()}
+      function gn(c,r){if(c<0||c>=cols||r<0||r>=rows)return null;return nodes[r*cols+c]}
+      function update(){
+        tX<0?(mX=lerp(mX,-9999,0.05),mY=lerp(mY,-9999,0.05)):(mX=lerp(mX,tX,EA),mY=lerp(mY,tY,EA));
+        for(const n of nodes){
+          const dx=mX-n.rx,dy=mY-n.ry,d=Math.hypot(dx,dy);
+          if(d<RA&&d>0&&mX>0){const f=Math.pow(1-d/RA,1.6)*ST;n.cx=lerp(n.cx,n.rx+(dx/d)*f,0.12);n.cy=lerp(n.cy,n.ry+(dy/d)*f,0.12);}
+          else{n.cx=lerp(n.cx,n.rx,RE);n.cy=lerp(n.cy,n.ry,RE);}
+        }
       }
-      const g = ctx.createRadialGradient(W/2,H/2,H*0.05,W/2,H/2,H*0.82);
-      g.addColorStop(0,'rgba(10,10,11,0)'); g.addColorStop(1,'rgba(10,10,11,0.92)');
-      ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
-      requestAnimationFrame(loop);
-    }
-    loop();
+      function lines(h){
+        const om=h?rows:cols,im=h?cols-1:rows-1;
+        for(let o=0;o<om;o++)for(let i=0;i<im;i++){
+          const a=h?gn(i,o):gn(o,i),b=h?gn(i+1,o):gn(o,i+1);
+          if(!a||!b)continue;
+          const mx=(a.cx+b.cx)/2,my=(a.cy+b.cy)/2;
+          const dm=mX>0?Math.hypot(mx-mX,my-mY):9999;
+          const nt=dm<RA?Math.pow(1-dm/RA,1.4):0;
+          const al=GAB+(GAN-GAB)*nt;
+          const rr=Math.round(AC.r+(230-AC.r)*nt*0.3),gg=Math.round(AC.g+(235-AC.g)*nt*0.15),bb=Math.round(AC.b+(240-AC.b)*nt*0.1);
+          ctx.beginPath();ctx.moveTo(a.cx,a.cy);ctx.lineTo(b.cx,b.cy);
+          ctx.strokeStyle=`rgba(${rr},${gg},${bb},${al.toFixed(3)})`;ctx.lineWidth=0.7+nt*0.6;ctx.stroke();
+        }
+      }
+      function dnodes(){
+        for(const n of nodes){
+          const dm=mX>0?Math.hypot(n.cx-mX,n.cy-mY):9999;
+          const nt=dm<RA*0.7?Math.pow(1-dm/(RA*0.7),1.8):0;
+          const al=NAB+(NAN-NAB)*nt,r=NRB+(NRN-NRB)*nt;
+          ctx.beginPath();ctx.arc(n.cx,n.cy,r,0,Math.PI*2);
+          ctx.fillStyle=`rgba(${AC.r},${AC.g},${AC.b},${al.toFixed(3)})`;ctx.fill();
+          if(nt>0.3){ctx.beginPath();ctx.arc(n.cx,n.cy,r*4,0,Math.PI*2);ctx.fillStyle=`rgba(${AC.r},${AC.g},${AC.b},${(nt*0.06).toFixed(3)})`;ctx.fill();}
+        }
+      }
+      function loop(){update();ctx.clearRect(0,0,W,H);lines(true);lines(false);dnodes();requestAnimationFrame(loop);}
+      if(window.matchMedia('(pointer: fine)').matches){
+        window.addEventListener('mousemove',e=>{tX=e.clientX;tY=e.clientY;});
+        window.addEventListener('mouseleave',()=>{tX=-9999;tY=-9999;});
+      }
+      window.addEventListener('resize',resize);
+      resize();loop();
+    })();
+
+    document.addEventListener('click',e=>{
+      const l=e.target.closest('a[href]');if(!l)return;
+      const h=l.getAttribute('href');
+      if(!h||h.startsWith('#')||h.startsWith('http')||l.target==='_blank')return;
+      e.preventDefault();
+      document.body.style.transition='opacity 0.25s ease';
+      document.body.style.opacity='0';
+      setTimeout(()=>{window.location.href=h;},260);
+    });
   </script>
 </body>
 </html>

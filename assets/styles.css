@@ -110,6 +110,21 @@ nav {
   color: var(--white);
 }
 
+.nav-links a.nav-active,
+.nav-links .dropdown-toggle.nav-active {
+  color: var(--accent);
+  position: relative;
+}
+.nav-links a.nav-active::after,
+.nav-links .dropdown-toggle.nav-active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0; right: 0;
+  height: 1px;
+  background: var(--accent);
+}
+
 .nav-cta {
   background: transparent;
   border: 1px solid var(--accent);
@@ -1296,6 +1311,8 @@ footer {
   }
   .nav-links > li > a:not(.btn-primary):hover { color: var(--accent); }
   .nav-links > li > a:not(.btn-primary):hover::after { opacity: 1; transform: translateX(0); }
+  .nav-links > li > a.nav-active:not(.btn-primary) { color: var(--accent); }
+  .nav-links > li > a.nav-active:not(.btn-primary)::after { opacity: 1; transform: translateX(0); }
 
   /* section divider rule inside mobile nav */
   .nav-links li.mobile-rule {
@@ -2186,3 +2203,16 @@ a[href]:not([href^="#"]):not([href^="mailto"]):not([href^="tel"]):not([href^="ht
     .toc li { font-size: 0.88rem; color: var(--grey-pale); margin-bottom: 0.35rem; }
     .toc a { color: var(--grey-pale); }
     .toc a:hover { color: var(--accent); }
+
+/* ── PAGE TRANSITIONS ── */
+body {
+  opacity: 0;
+  animation: pageIn 0.35s ease forwards;
+}
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+a[href].transition-out {
+  pointer-events: none;
+}

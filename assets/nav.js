@@ -2,6 +2,39 @@
 
 (function () {
 
+  // ── PAGE TRANSITIONS ──
+  // Fade out before navigating away
+  document.addEventListener('click', e => {
+    const link = e.target.closest('a[href]');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    // Only internal non-anchor, non-external links
+    if (!href || href.startsWith('#') || href.startsWith('http') ||
+        href.startsWith('mailto') || href.startsWith('tel') ||
+        link.target === '_blank') return;
+    e.preventDefault();
+    document.body.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+    document.body.style.opacity    = '0';
+    document.body.style.transform  = 'translateY(-6px)';
+    setTimeout(() => { window.location.href = href; }, 260);
+  });
+
+  // ── ACTIVE NAV STATE ──
+  // Match current path to nav links and mark active
+  (function () {
+    const path = window.location.pathname.replace(/\/$/, '') || '/';
+    document.querySelectorAll('.nav-links a[href]').forEach(a => {
+      const href = a.getAttribute('href').replace(/\/$/, '') || '/';
+      // exact match, or path starts with href (for sub-pages)
+      if (href !== '#' && (path === href || (href !== '/' && path.startsWith(href)))) {
+        a.classList.add('nav-active');
+        // if inside dropdown, also mark the toggle
+        const dropdown = a.closest('.nav-dropdown');
+        if (dropdown) dropdown.querySelector('.dropdown-toggle')?.classList.add('nav-active');
+      }
+    });
+  })();
+
   // ── MOBILE HAMBURGER ──
   const hamburger = document.getElementById('hamburger');
   const navLinks  = document.getElementById('nav-links');
