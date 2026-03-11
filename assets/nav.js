@@ -87,17 +87,14 @@
     });
   }
 
-  // ── BACK TO TOP + WA FLOAT ──
-  const btt     = document.getElementById('back-to-top');
-  const waFloat = document.querySelector('.wa-float');
-  if (btt || waFloat) {
+  // ── BACK TO TOP ──
+  const btt = document.getElementById('back-to-top');
+  if (btt) {
     const onScroll = () => {
-      const show = window.scrollY > 400;
-      if (btt)     btt.classList.toggle('visible', show);
-      if (waFloat) waFloat.classList.toggle('visible', show);
+      btt.classList.toggle('visible', window.scrollY > 200);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll(); // set correct initial state without waiting for a scroll event
+    onScroll();
   }
 
   // ── DARK / LIGHT TOGGLE ──
