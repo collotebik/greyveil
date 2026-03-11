@@ -110,4 +110,29 @@
     if (btn) btn.addEventListener('click', () => apply(!isDark));
   })();
 
+  // ── NAV SCROLL STATE ──
+  (function () {
+    const nav = document.querySelector('nav');
+    if (!nav) return;
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+
+  // ── SCROLL REVEAL ──
+  (function () {
+    const els = document.querySelectorAll('.reveal, .reveal-stagger');
+    if (!els.length) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(el => io.observe(el));
+  })();
+
+
 })();
