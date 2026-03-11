@@ -491,6 +491,7 @@ h2 {
   grid-template-columns: 1fr 1fr;
   gap: 6rem;
   align-items: center;
+  padding: 7rem 4rem;
 }
 
 .why-visual { position: relative; }
@@ -645,6 +646,10 @@ h2 {
   flex-wrap: wrap;
 }
 
+#cta .section-label {
+  justify-content: center;
+}
+
 
 /* ── 15. FOOTER ── */
 
@@ -693,6 +698,12 @@ footer {
 }
 
 .footer-links a:hover { color: var(--white); }
+
+.footer-social-link {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
 
 .footer-copy {
   font-size: 0.78rem;
