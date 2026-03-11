@@ -520,13 +520,15 @@
 
       // only track mouse on desktop
       const isDesktop = window.matchMedia('(pointer: fine)').matches;
+      const heroSection = canvas.closest('section') || canvas.parentElement;
       if (isDesktop) {
         window.addEventListener('mousemove', e => {
-          const rect = canvas.getBoundingClientRect();
+          const rect = heroSection.getBoundingClientRect();
           targetX = e.clientX - rect.left;
           targetY = e.clientY - rect.top;
         });
         window.addEventListener('mouseleave', () => { targetX = -9999; targetY = -9999; });
+        heroSection.addEventListener('mouseleave', () => { targetX = -9999; targetY = -9999; });
       }
 
       window.addEventListener('resize', resize);
