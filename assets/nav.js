@@ -79,22 +79,19 @@
   if (cookieBar && !localStorage.getItem('gv_cookie_ok')) {
     setTimeout(() => cookieBar.classList.add('show'), 1200);
   }
-  if (cookieBar && cookieBtn) {
+  if (cookieBtn) {
     cookieBtn.addEventListener('click', () => {
       cookieBar.classList.remove('show');
       localStorage.setItem('gv_cookie_ok', '1');
-      setTimeout(() => { cookieBar.style.display = 'none'; }, 420);
     });
   }
 
   // ── BACK TO TOP ──
   const btt = document.getElementById('back-to-top');
   if (btt) {
-    const onScroll = () => {
-      btt.classList.toggle('visible', window.scrollY > 200);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    window.addEventListener('scroll', () => {
+      btt.classList.toggle('visible', window.scrollY > 400);
+    });
   }
 
   // ── DARK / LIGHT TOGGLE ──

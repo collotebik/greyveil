@@ -491,7 +491,6 @@ h2 {
   grid-template-columns: 1fr 1fr;
   gap: 6rem;
   align-items: center;
-  padding: 7rem 4rem;
 }
 
 .why-visual { position: relative; }
@@ -646,10 +645,6 @@ h2 {
   flex-wrap: wrap;
 }
 
-#cta .section-label {
-  justify-content: center;
-}
-
 
 /* ── 15. FOOTER ── */
 
@@ -698,12 +693,6 @@ footer {
 }
 
 .footer-links a:hover { color: var(--white); }
-
-.footer-social-link {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
 
 .footer-copy {
   font-size: 0.78rem;
@@ -1464,7 +1453,7 @@ a[href]:not([href^="#"]):not([href^="mailto"]):not([href^="tel"]):not([href^="ht
   justify-content: center;
   z-index: 9999;
   box-shadow: 0 4px 16px rgba(37,211,102,0.35);
-  transition: transform 0.25s, box-shadow 0.25s, opacity 0.3s;
+  transition: transform 0.25s, box-shadow 0.25s;
   text-decoration: none;
 }
 .wa-float:hover {
