@@ -53,60 +53,42 @@
   <script>
     (function(){
       const canvas=document.getElementById('c'),ctx=canvas.getContext('2d');
-      const AC={r:69,g:170,b:193},SP=52,ST=90,RA=280,EA=0.09,RE=0.055;
-      const GAB=0.13,GAN=0.55,NAB=0.18,NAN=0.9,NRB=1.0,NRN=2.8;
-      let W=0,H=0,mX=-9999,mY=-9999,tX=-9999,tY=-9999,nodes=[],cols=0,rows=0;
-      const lerp=(a,b,t)=>a+(b-a)*t;
-      function build(){
-        cols=Math.ceil(W/SP)+2;rows=Math.ceil(H/SP)+2;
-        const px=((cols*SP)-W)/2,py=((rows*SP)-H)/2;
-        nodes=[];
-        for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
-          const rx=-px+c*SP,ry=-py+r*SP;
-          nodes.push({rx,ry,cx:rx,cy:ry});
-        }
-      }
-      function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;build()}
-      function gn(c,r){if(c<0||c>=cols||r<0||r>=rows)return null;return nodes[r*cols+c]}
-      function update(){
-        tX<0?(mX=lerp(mX,-9999,0.05),mY=lerp(mY,-9999,0.05)):(mX=lerp(mX,tX,EA),mY=lerp(mY,tY,EA));
-        for(const n of nodes){
-          const dx=mX-n.rx,dy=mY-n.ry,d=Math.hypot(dx,dy);
-          if(d<RA&&d>0&&mX>0){const f=Math.pow(1-d/RA,1.6)*ST;n.cx=lerp(n.cx,n.rx+(dx/d)*f,0.12);n.cy=lerp(n.cy,n.ry+(dy/d)*f,0.12);}
-          else{n.cx=lerp(n.cx,n.rx,RE);n.cy=lerp(n.cy,n.ry,RE);}
-        }
-      }
-      function lines(h){
-        const om=h?rows:cols,im=h?cols-1:rows-1;
-        for(let o=0;o<om;o++)for(let i=0;i<im;i++){
-          const a=h?gn(i,o):gn(o,i),b=h?gn(i+1,o):gn(o,i+1);
-          if(!a||!b)continue;
-          const mx=(a.cx+b.cx)/2,my=(a.cy+b.cy)/2;
-          const dm=mX>0?Math.hypot(mx-mX,my-mY):9999;
-          const nt=dm<RA?Math.pow(1-dm/RA,1.4):0;
-          const al=GAB+(GAN-GAB)*nt;
-          const rr=Math.round(AC.r+(230-AC.r)*nt*0.3),gg=Math.round(AC.g+(235-AC.g)*nt*0.15),bb=Math.round(AC.b+(240-AC.b)*nt*0.1);
-          ctx.beginPath();ctx.moveTo(a.cx,a.cy);ctx.lineTo(b.cx,b.cy);
-          ctx.strokeStyle=`rgba(${rr},${gg},${bb},${al.toFixed(3)})`;ctx.lineWidth=0.7+nt*0.6;ctx.stroke();
-        }
-      }
-      function dnodes(){
-        for(const n of nodes){
-          const dm=mX>0?Math.hypot(n.cx-mX,n.cy-mY):9999;
-          const nt=dm<RA*0.7?Math.pow(1-dm/(RA*0.7),1.8):0;
-          const al=NAB+(NAN-NAB)*nt,r=NRB+(NRN-NRB)*nt;
-          ctx.beginPath();ctx.arc(n.cx,n.cy,r,0,Math.PI*2);
-          ctx.fillStyle=`rgba(${AC.r},${AC.g},${AC.b},${al.toFixed(3)})`;ctx.fill();
-          if(nt>0.3){ctx.beginPath();ctx.arc(n.cx,n.cy,r*4,0,Math.PI*2);ctx.fillStyle=`rgba(${AC.r},${AC.g},${AC.b},${(nt*0.06).toFixed(3)})`;ctx.fill();}
-        }
-      }
-      function loop(){update();ctx.clearRect(0,0,W,H);lines(true);lines(false);dnodes();requestAnimationFrame(loop);}
+      const AC={r:69,g:170,b:193},COUNT=55,CD=130,MR=160,MF=0.016;
+      let W=0,H=0,mx=-9999,my=-9999,particles=[];
+      function rand(a,b){return a+Math.random()*(b-a);}
+      function P(){this.x=rand(0,W);this.y=rand(0,H);this.vx=rand(-0.25,0.25);this.vy=rand(-0.18,0.18);this.r=rand(0.8,2.0);this.a=rand(0.25,0.6);this.pulse=rand(0,Math.PI*2);this.ps=rand(0.008,0.022);}
+      function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;particles=Array.from({length:COUNT},()=>new P());}
       if(window.matchMedia('(pointer: fine)').matches){
-        window.addEventListener('mousemove',e=>{tX=e.clientX;tY=e.clientY;});
-        window.addEventListener('mouseleave',()=>{tX=-9999;tY=-9999;});
+        window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+        window.addEventListener('mouseleave',()=>{mx=-9999;my=-9999;});
       }
-      window.addEventListener('resize',resize);
-      resize();loop();
+      function loop(){
+        ctx.clearRect(0,0,W,H);
+        for(const p of particles){
+          p.pulse+=p.ps;
+          if(mx>0){const dx=p.x-mx,dy=p.y-my,d=Math.hypot(dx,dy);if(d<MR&&d>0){const f=(1-d/MR)*MF;p.vx+=(dx/d)*f;p.vy+=(dy/d)*f;}}
+          p.vx*=0.994;p.vy*=0.994;p.x+=p.vx;p.y+=p.vy;
+          if(p.x<-12)p.x=W+10;if(p.x>W+12)p.x=-10;if(p.y<-12)p.y=H+10;if(p.y>H+12)p.y=-10;
+        }
+        for(let i=0;i<particles.length;i++){const a=particles[i];for(let j=i+1;j<particles.length;j++){
+          const b=particles[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.hypot(dx,dy);
+          if(d>CD)continue;
+          const t=1-d/CD;let nm=0;
+          if(mx>0){const mx2=(a.x+b.x)/2,my2=(a.y+b.y)/2,dm=Math.hypot(mx2-mx,my2-my);nm=dm<MR?Math.pow(1-dm/MR,1.6):0;}
+          ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
+          ctx.strokeStyle=`rgba(${AC.r},${AC.g},${AC.b},${(t*0.18+nm*0.45).toFixed(3)})`;ctx.lineWidth=0.6+nm*0.7;ctx.stroke();
+        }}
+        for(const p of particles){
+          const pulse=0.5+0.5*Math.sin(p.pulse);let nm=0;
+          if(mx>0){const dm=Math.hypot(p.x-mx,p.y-my);nm=dm<MR*0.8?Math.pow(1-dm/(MR*0.8),2):0;}
+          const al=(p.a*(0.7+0.3*pulse)+nm*0.5).toFixed(3),r=p.r+nm*1.8;
+          if(nm>0.15){ctx.beginPath();ctx.arc(p.x,p.y,r*5,0,Math.PI*2);ctx.fillStyle=`rgba(${AC.r},${AC.g},${AC.b},${(nm*0.07).toFixed(3)})`;ctx.fill();}
+          ctx.beginPath();ctx.arc(p.x,p.y,r,0,Math.PI*2);
+          ctx.fillStyle=`rgba(${AC.r},${AC.g},${AC.b},${al})`;ctx.fill();
+        }
+        requestAnimationFrame(loop);
+      }
+      window.addEventListener('resize',resize);resize();loop();
     })();
 
     document.addEventListener('click',e=>{

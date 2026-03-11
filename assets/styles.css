@@ -91,9 +91,13 @@ nav {
 
 .nav-links {
   display: flex;
+  align-items: center;
   gap: 2.8rem;
   list-style: none;
 }
+/* hide mobile-only dividers on desktop */
+.nav-links li.mobile-rule,
+.nav-links li.mobile-cta-item { display: none; }
 
 .nav-links a {
   color: var(--grey-pale);
@@ -1469,7 +1473,16 @@ footer {
   gap: 4px;
   cursor: pointer;
   user-select: none;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--grey-pale);
+  text-decoration: none;
+  transition: color 0.25s;
+  line-height: 1;
 }
+.dropdown-toggle:hover { color: var(--white); }
 .dropdown-toggle svg {
   transition: transform 0.22s ease;
   opacity: 0.7;
