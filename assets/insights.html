@@ -276,61 +276,7 @@
 
   <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
 
-  <script>
-    const hamburger = document.getElementById('hamburger');
-    const navLinks  = document.getElementById('nav-links');
-    if (hamburger && navLinks) {
-      const navEl = hamburger.closest('nav');
-      hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('open');
-        hamburger.classList.toggle('active');
-        navEl.classList.toggle('nav-open');
-      });
-      navLinks.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', () => {
-          navLinks.classList.remove('open');
-          hamburger.classList.remove('active');
-          navEl.classList.remove('nav-open');
-        });
-      });
-    }
-    // ── COOKIE BAR ──
-    const cookieBar = document.getElementById('cookie-bar');
-    const cookieBtn = document.getElementById('cookie-accept');
-    if (cookieBar && !localStorage.getItem('gv_cookie_ok')) {
-      setTimeout(() => cookieBar.classList.add('show'), 1200);
-    }
-    if (cookieBtn) cookieBtn.addEventListener('click', () => {
-      cookieBar.classList.remove('show');
-      localStorage.setItem('gv_cookie_ok', '1');
-    });
-
-    // ── KNOWLEDGE DROPDOWN ──
-    document.querySelectorAll('.nav-dropdown').forEach(drop => {
-      const toggle = drop.querySelector('.dropdown-toggle');
-      toggle.addEventListener('click', (e) => {
-        e.preventDefault();
-        drop.classList.toggle('open');
-      });
-    });
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('.nav-dropdown')) {
-        document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
-      }
-    });
-    // filter buttons
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-      });
-    });
-    // back to top
-    const btt = document.getElementById('backToTop');
-    if (btt) {
-      window.addEventListener('scroll', () => { btt.classList.toggle('visible', window.scrollY > 400); });
-      btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-    }
-  </script>
+  
+  <script src="/assets/nav.js" defer></script>
 </body>
 </html>
