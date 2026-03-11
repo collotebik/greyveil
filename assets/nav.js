@@ -19,31 +19,6 @@
     setTimeout(() => { window.location.href = href; }, 260);
   });
 
-  // ── SCROLL-AWARE NAV ──
-  (function () {
-    const nav = document.querySelector('nav');
-    if (!nav) return;
-    let lastY = window.scrollY;
-    const THRESHOLD = 80; // px from top before hiding kicks in
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-      if (y < THRESHOLD) {
-        nav.classList.remove('nav-hidden');
-      } else if (y > lastY) {
-        // scrolling down — hide
-        nav.classList.add('nav-hidden');
-        // also close mobile menu if open
-        nav.classList.remove('nav-open');
-        document.getElementById('nav-links')?.classList.remove('open');
-        document.getElementById('hamburger')?.classList.remove('active');
-      } else {
-        // scrolling up — show
-        nav.classList.remove('nav-hidden');
-      }
-      lastY = y;
-    }, { passive: true });
-  })();
-
   // ── ACTIVE NAV STATE ──
   // Match current path to nav links and mark active
   (function () {
