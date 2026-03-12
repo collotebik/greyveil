@@ -1,10 +1,8 @@
 exports.handler = async function (event) {
-  // only allow POST
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
-  // basic rate limiting hint (Netlify doesn't have built-in, but you can add Redis later)
   try {
     const { messages, system } = JSON.parse(event.body);
 
@@ -12,7 +10,7 @@ exports.handler = async function (event) {
       method: 'POST',
       headers: {
         'Content-Type':      'application/json',
-        'x-api-key':         process.env.ANTHROPIC_API_KEY,  // ← stored in Netlify env, never exposed
+        'x-api-key':         process.env.ANTHROPIC_API_KEY,
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
@@ -27,14 +25,17 @@ exports.handler = async function (event) {
 
     return {
       statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
       body: JSON.stringify(data),
     };
 
   } catch (err) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Internal server error' }),
+      body: JSON.stringify({ error: err.message }),
     };
   }
 };
