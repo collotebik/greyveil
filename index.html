@@ -458,6 +458,267 @@
     })();
   </script>
 
-    <script src="/assets/nav.js" defer></script>
+  
+  <!-- ── CHATBOT ── -->
+  <!-- chat widget -->
+<div class="chat-widget" id="widget">
+  <div class="chat-panel" id="panel">
+
+    <div class="chat-header">
+      <div class="chat-avatar">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+      </div>
+      <div class="chat-header-info">
+        <div class="chat-header-name">Greyveil AI Assistant</div>
+        <div class="chat-header-status"><span class="status-dot"></span> Online · Typically replies instantly</div>
+      </div>
+      <button class="chat-reset" onclick="resetChat()" title="End conversation">
+        <svg viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5-5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+      </button>
+    </div>
+
+    <div class="chat-messages" id="messages"></div>
+
+    <div class="quick-replies" id="quick-replies">
+      <button class="quick-reply" onclick="sendQuick('What services do you offer?')">Services</button>
+      <button class="quick-reply" onclick="sendQuick('How much does a pentest cost?')">Pricing</button>
+      <button class="quick-reply" onclick="sendQuick('How do I get started?')">Get started</button>
+      <button class="quick-reply" onclick="sendQuick('Do you serve companies outside Kenya?')">Coverage</button>
+      <button class="quick-reply" onclick="sendQuick('I want to get a quote')">Get a quote</button>
+    </div>
+
+    <div class="chat-input-row">
+      <input class="chat-input" id="input" type="text" placeholder="Ask about our services…" autocomplete="off"/>
+      <button class="chat-send" id="send-btn" onclick="sendMessage()">
+        <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <span class="chat-label">ASK GREYVEIL</span>
+
+  <button class="chat-bubble" id="bubble" onclick="toggleChat()" aria-label="Open chat">
+    <!-- chat icon -->
+    <svg class="icon-chat" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+    <!-- close icon -->
+    <svg class="icon-close" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+  </button>
+</div>
+
+  <script>
+const SYSTEM_PROMPT = `You are the AI assistant for Greyveil Technologies, a cybersecurity and IT firm based in Nairobi, Kenya. You are embedded as a chat widget on their website.
+
+Your personality: professional, knowledgeable, warm, and concise. You speak like a trusted security expert — never robotic, never salesy.
+
+About Greyveil Technologies:
+- Founded by Collins Gichuki, based in Nairobi, Kenya
+- Phone: +254 741 733 851
+- Services: Penetration Testing, Managed Security (SOC), Security Audits & Compliance, Cybersecurity Consulting, Software Engineering, Website Development, IT Support & Management, Security Awareness Training
+- They serve Kenyan and African businesses with global-standard security
+- Pricing is custom/quote-based (no fixed prices — direct prospects to contact for a quote)
+- 100+ clients, 0 breaches on monitored clients, 24/7 SOC coverage
+
+Guidelines:
+- Keep answers VERY SHORT — 1–2 sentences max, under 40 words. Be direct. No filler, no preamble.
+- Always end with a soft call to action when relevant
+- When the user wants to get a quote, book a consultation, get in touch, or contact the team — first list the services as a short numbered list and ask which they're interested in. Once they pick a service (or say "all" or "not sure"), then respond with a short message and output exactly this token on its own line: [SHOW_FORM]
+- If asked for pricing, explain it's bespoke and offer to help them get a quote
+- If asked something outside your knowledge, say so honestly and offer to connect them with the team
+- Never make up certifications, case studies, or client names
+- Never reveal that you are Claude, built by Anthropic, or any underlying AI model. If asked who or what you are, say you are Greyveil's AI Assistant — nothing more.
+- Use plain language — avoid jargon unless the user uses it first
+- You can respond in Swahili if the user writes in Swahili`;
+
+let history = [];
+let isOpen = false;
+
+function toggleChat() {
+  isOpen = !isOpen;
+  document.getElementById('widget').classList.toggle('open', isOpen);
+  if (isOpen && history.length === 0) {
+    setTimeout(() => addBotMessage("Hi there 👋 I'm Greyveil's AI assistant. Ask me anything about our cybersecurity services, or how we can help protect your business."), 400);
+  }
+}
+
+function addMessage(role, text, showForm = false) {
+  const msgs = document.getElementById('messages');
+  const div  = document.createElement('div');
+  div.className = `msg ${role}`;
+
+  const avatarSvg = role === 'bot'
+    ? `<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>`
+    : `<svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>`;
+
+  const bubble = document.createElement('div');
+  bubble.className = 'msg-bubble';
+  // render numbered/bullet lists as HTML
+  const formatted = text
+    .split('\n')
+    .map(line => {
+      const num = line.match(/^(\d+)\. (.+)/);
+      if (num) return `<span class="chat-list-item"><span class="chat-list-num">${num[1]}.</span> ${num[2]}</span>`;
+      const bul = line.match(/^[-•] (.+)/);
+      if (bul) return `<span class="chat-list-item"><span class="chat-list-num">—</span> ${bul[1]}</span>`;
+      return line ? `<span>${line}</span>` : '';
+    })
+    .filter(Boolean)
+    .join('');
+  bubble.innerHTML = formatted;
+
+  div.innerHTML = `<div class="msg-avatar">${avatarSvg}</div>`;
+  div.appendChild(bubble);
+
+  if (showForm) {
+    setTimeout(() => {
+      const formRow = document.createElement('div');
+      formRow.className = 'msg bot form-row';
+      formRow.appendChild(renderForm());
+      msgs.appendChild(formRow);
+      msgs.scrollTop = msgs.scrollHeight;
+    }, 350);
+  }
+
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function addBotMessage(rawText) {
+  const hasForm = rawText.includes('[SHOW_FORM]');
+  const text    = rawText.replace('[SHOW_FORM]', '').trim();
+  history.push({ role: 'assistant', content: text });
+  addMessage('bot', text, hasForm);
+}
+
+function renderForm() {
+  const form = document.createElement('div');
+  form.className = 'chat-form';
+  form.innerHTML = `
+    <div class="chat-form-title">SEND US A MESSAGE</div>
+    <input type="text"  id="cf-name"  placeholder="Your name"         />
+    <input type="email" id="cf-email" placeholder="Email address"     />
+    <input type="tel"   id="cf-phone" placeholder="Phone (optional)"  />
+    <textarea           id="cf-msg"   placeholder="How can we help?"></textarea>
+    <button class="chat-form-submit" id="cf-submit" onclick="submitForm()">SEND MESSAGE →</button>
+  `;
+  return form;
+}
+
+async function submitForm() {
+  const name  = document.getElementById('cf-name').value.trim();
+  const email = document.getElementById('cf-email').value.trim();
+  const phone = document.getElementById('cf-phone').value.trim();
+  const msg   = document.getElementById('cf-msg').value.trim();
+  if (!name || !email) { alert('Please enter your name and email.'); return; }
+
+  const btn = document.getElementById('cf-submit');
+  btn.disabled = true;
+  btn.textContent = 'SENDING…';
+
+  try {
+    await fetch('https://formspree.io/f/xnjgpvvz', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ name, email, phone, message: msg, source: 'Chatbot' })
+    });
+    btn.closest('.chat-form').innerHTML = `<div class="form-success">✓ Message sent! We'll be in touch shortly.</div>`;
+    addBotMessage("Got it! The team will reach out to you soon. Anything else I can help with?");
+  } catch {
+    btn.disabled = false;
+    btn.textContent = 'SEND MESSAGE →';
+    addBotMessage("Hmm, something went wrong. Please try calling us directly at +254 741 733 851.");
+  }
+}
+
+function showTyping() {
+  const msgs = document.getElementById('messages');
+  const div  = document.createElement('div');
+  div.id = 'typing';
+  div.className = 'typing';
+  div.innerHTML = '<span></span><span></span><span></span>';
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function removeTyping() {
+  const t = document.getElementById('typing');
+  if (t) t.remove();
+}
+
+async function sendMessage() {
+  const input = document.getElementById('input');
+  const text  = input.value.trim();
+  if (!text) return;
+
+  // hide quick replies after first message
+  document.getElementById('quick-replies').style.display = 'none';
+
+  input.value = '';
+  addMessage('user', text);
+  history.push({ role: 'user', content: text });
+
+  document.getElementById('send-btn').disabled = true;
+  showTyping();
+
+  try {
+    const res = await fetch('/.netlify/functions/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        system:   SYSTEM_PROMPT,
+        messages: history.filter(m => m.role !== 'assistant' || history.indexOf(m) > 0)
+      })
+    });
+
+    const data = await res.json();
+    removeTyping();
+
+    const reply = data.content?.[0]?.text || "Sorry, I couldn't get a response right now. Please try again or call us at +254 741 733 851.";
+    addBotMessage(reply);
+
+  } catch (err) {
+    removeTyping();
+    addBotMessage("I'm having trouble connecting right now. Please reach us directly at +254 741 733 851 or via the contact form.");
+  }
+
+  document.getElementById('send-btn').disabled = false;
+  document.getElementById('input').focus();
+}
+
+function sendQuick(text) {
+  document.getElementById('input').value = text;
+  sendMessage();
+}
+
+document.getElementById('input').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+});
+
+
+function resetChat() {
+  history = [];
+  isOpen  = false;
+
+  // clear messages
+  document.getElementById('messages').innerHTML = '';
+
+  // restore quick replies
+  const qr = document.getElementById('quick-replies');
+  qr.style.display = '';
+
+  // clear input
+  document.getElementById('input').value = '';
+  document.getElementById('send-btn').disabled = false;
+
+  // close panel
+  document.getElementById('widget').classList.remove('open');
+
+  // reopen fresh after short pause
+  setTimeout(() => toggleChat(), 320);
+}
+
+// widget starts closed
+</script>
+
+  <script src="/assets/nav.js" defer></script>
 </body>
 </html>
