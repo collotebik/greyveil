@@ -72,16 +72,24 @@
     }
   });
 
-  // ── COOKIE BAR ──
-  const cookieBar = document.getElementById('cookie-bar');
-  const cookieBtn = document.getElementById('cookie-accept');
-  if (cookieBar && !localStorage.getItem('gv_cookie_ok')) {
-    setTimeout(() => cookieBar.classList.add('show'), 1200);
+  // ── COOKIE MODAL ──
+  const cookieOverlay = document.getElementById('cookie-bar');
+  const cookieAccept  = document.getElementById('cookie-accept');
+  const cookieDecline = document.getElementById('cookie-decline');
+
+  if (cookieOverlay && !localStorage.getItem('gv_cookie_ok')) {
+    setTimeout(() => cookieOverlay.classList.add('show'), 1200);
   }
-  if (cookieBtn) {
-    cookieBtn.addEventListener('click', () => {
-      cookieBar.classList.remove('show');
-      localStorage.setItem('gv_cookie_ok', '1');
+  function dismissCookie() {
+    if (cookieOverlay) cookieOverlay.classList.remove('show');
+    localStorage.setItem('gv_cookie_ok', '1');
+  }
+  if (cookieAccept)  cookieAccept.addEventListener('click', dismissCookie);
+  if (cookieDecline) cookieDecline.addEventListener('click', dismissCookie);
+  // click outside modal to dismiss
+  if (cookieOverlay) {
+    cookieOverlay.addEventListener('click', e => {
+      if (e.target === cookieOverlay) dismissCookie();
     });
   }
 

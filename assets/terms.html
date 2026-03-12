@@ -227,9 +227,15 @@
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M8 12V4M4 8l4-4 4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </a>
 
-  <div class="cookie-bar" id="cookie-bar">
-    <span>We use cookies to improve your experience. By using this site you agree to our <a href="/privacy-policy">privacy practices</a> in accordance with Kenya's Data Protection Act.</span>
-    <button class="cookie-accept" id="cookie-accept">Got it</button>
+  <div class="cookie-overlay" id="cookie-bar">
+    <div class="cookie-bar">
+      <div class="cookie-bar-title">Cookies &amp; Privacy</div>
+      <span>We use cookies to improve your experience. By using this site you agree to our <a href="/privacy-policy">privacy practices</a> in accordance with Kenya's Data Protection Act.</span>
+      <div class="cookie-actions">
+        <button class="cookie-accept" id="cookie-accept">Accept</button>
+        <button class="cookie-decline" id="cookie-decline">Decline</button>
+      </div>
+    </div>
   </div>
 
   <script src="/assets/nav.js" defer></script>
